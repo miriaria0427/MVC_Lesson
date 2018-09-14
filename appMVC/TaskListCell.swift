@@ -28,7 +28,6 @@ class TaskListCell: UITableViewCell {
         deadlineLabel.textColor = UIColor.black
         deadlineLabel.font = UIFont.systemFont(ofSize:14)
         contentView.addSubview(deadlineLabel)
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
