@@ -12,6 +12,7 @@ import Foundation
 //モデルクラス　データに関するロジック
 class TaskDataSource:NSObject{
     
+    //task について
     //Task 一覧を保持するArray UITableViewに表示させるためのデータ
     private var tasks = [Task]()
     
