@@ -15,11 +15,10 @@ class TaskDataSource:NSObject{
     //task について
     //Task 一覧を保持するArray UITableViewに表示させるためのデータ
     private var tasks = [Task]()
-    //ユーザデフォルトを保持
-    let userDefaults = UserDefaults.standard
     
     //UserDefaultsから保存したTask一覧を取得するメソッド
     func loadData(){
+        let userDefaults = UserDefaults.standard
         let taskDictionaries = userDefaults.object(forKey: "tasks") as? [[String:Any]]
         guard let t = taskDictionaries else { return }
         
@@ -41,7 +40,7 @@ class TaskDataSource:NSObject{
             taskDictionaries.append(taskDictionary)
         }
         
-        //let userDefaults = UserDefaults.standard
+        let userDefaults = UserDefaults.standard
         userDefaults.set(taskDictionaries,forKey:"tasks")
         userDefaults.synchronize()
     }

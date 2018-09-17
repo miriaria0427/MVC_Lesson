@@ -34,14 +34,17 @@ import UIKit
     //保存ボタンタップ時の挙動
     @IBAction func saveButtonTapped(_ sender: Any) {
         guard let taskText = taskText.text else {
-            showMissingTaskTextAlert()
             return
+        }
+        if taskText == ""{
+            showMissingTaskTextAlert()
         }
         guard let taskDeadline = taskDeadline.text else {
-            showMissingTaskDeadlineAlert()
             return
         }
-        
+        if taskDeadline == ""{
+            showMissingTaskDeadlineAlert()
+        }
         //タスク、締切日時が両方入力されていたら保存
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat  = "yyyy/MM/dd HH:mm"

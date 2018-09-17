@@ -12,10 +12,12 @@ import UIKit
 //コントローラー
  class TaskListViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
-    private var dataSource = TaskDataSource()
+    //タスク一覧を保持する
+    //var tasks = [Task]()
+
+    var dataSource : TaskDataSource!
     
     @IBOutlet weak var tableView: UITableView!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,24 +25,23 @@ import UIKit
         tableView.delegate = self
         tableView.dataSource = self
         
-        //let dataSource = TaskDataSource()
+        //dataSourceのインスタンス作成（ここでインスタンス作らないとnillでエラー)
+        dataSource = TaskDataSource()
         dataSource.loadData()
     }
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        tableView.reloadData()
-//    }
+    //タスク登録画面から戻ってきたときに再描画
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
     
-
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //let dataSource = TaskDataSource()
         return dataSource.count()
     }
    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        //let dataSource = TaskDataSource()
         let task = dataSource.data(at: indexPath.row)
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat  = "yyyy/MM/dd HH:mm"
