@@ -28,6 +28,9 @@ import UIKit
         // UITextFieldが編集モードになった時に、キーボードではなく、UIDatePickerになるようにしている
         taskDeadline.inputView = datePicker
         
+        let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(dismissKeyboard))
+        self.view.addGestureRecognizer(tapGesture)
+        
         dataSource = TaskDataSource()
     }
     
@@ -50,6 +53,7 @@ import UIKit
         dateFormatter.dateFormat  = "yyyy/MM/dd HH:mm"
         let deadlineText = dateFormatter.date(from: taskDeadline)
         let task = Task(text: taskText, deadline: deadlineText!)
+        
         dataSource.save(task: task)
         
         showSaveAlert()
@@ -89,5 +93,10 @@ import UIKit
         dateFormatter.dateFormat  = "yyyy/MM/dd HH:mm"
         let deadlineText = dateFormatter.string(from: sender.date)
         taskDeadline.text = deadlineText
+    }
+    
+    @objc func dismissKeyboard(){
+        // キーボードを閉じる
+        view.endEditing(true)
     }
 }
