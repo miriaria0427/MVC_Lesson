@@ -25,9 +25,10 @@ import UIKit
         datePicker = UIDatePicker()
         datePicker.datePickerMode = .dateAndTime
         datePicker.addTarget(self, action: #selector(datePickerValueChanged(_:)), for: .valueChanged)
-        // UITextFieldが編集モードになった時に、キーボードではなく、UIDatePickerになるようにしている
+        // UITextFieldが編集モードになった時に、キーボードではなく、UIDatePickerにする
         taskDeadline.inputView = datePicker
         
+        //タップでキーボードを閉じるようにする
         let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(dismissKeyboard))
         self.view.addGestureRecognizer(tapGesture)
         
@@ -47,16 +48,15 @@ import UIKit
         }
         if taskDeadline == ""{
             showMissingTaskDeadlineAlert()
-        }
+        }else{
         //タスク、締切日時が両方入力されていたら保存
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat  = "yyyy/MM/dd HH:mm"
         let deadlineText = dateFormatter.date(from: taskDeadline)
         let task = Task(text: taskText, deadline: deadlineText!)
-        
         dataSource.save(task: task)
-        
         showSaveAlert()
+        }
     }
     
     // 保存が成功した時のアラート

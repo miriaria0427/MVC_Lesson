@@ -11,9 +11,6 @@ import UIKit
 
 //コントローラー
  class TaskListViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
-    
-    //タスク一覧を保持する
-    //var tasks = [Task]()
 
     var dataSource : TaskDataSource!
     
@@ -25,7 +22,6 @@ import UIKit
         tableView.delegate = self
         tableView.dataSource = self
         
-        //dataSourceのインスタンス作成（ここでインスタンス作らないとnillでエラー)
         dataSource = TaskDataSource()
         dataSource.loadData()
     }
@@ -42,8 +38,10 @@ import UIKit
    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        //配列tasksの内容を取得する
         let task = dataSource.data(at: indexPath.row)
         let dateFormatter = DateFormatter()
+        // Date型→String型に変換
         dateFormatter.dateFormat  = "yyyy/MM/dd HH:mm"
         let deadlineText = dateFormatter.string(from: (task?.deadline)!)
         cell.textLabel?.text = task?.text
