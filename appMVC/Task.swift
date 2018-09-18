@@ -24,3 +24,10 @@ class Task{
         self.deadline = dictionary["deadline"] as! Date
     }
 }
+
+ //デバッグ用
+extension Task : CustomDebugStringConvertible {
+    var debugDescription: String{
+        return "Task(text:\(text),deadline:\(deadline))"
+    }
+}

@@ -12,7 +12,7 @@ import UIKit
  //コントローラー
   class CreateTaskViewController: UIViewController {
     
-    private var dataSource: TaskDataSource!
+    private var dataSource = TaskDataSource()
     private var datePicker: UIDatePicker!
     
     @IBOutlet weak var taskText: UITextField!
@@ -32,7 +32,7 @@ import UIKit
         let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(dismissKeyboard))
         self.view.addGestureRecognizer(tapGesture)
         
-        dataSource = TaskDataSource()
+        //dataSource = TaskDataSource()
     }
     
     //保存ボタンタップ時の挙動
