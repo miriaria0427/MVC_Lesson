@@ -31,8 +31,6 @@ import UIKit
         //タップでキーボードを閉じるようにする
         let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(dismissKeyboard))
         self.view.addGestureRecognizer(tapGesture)
-        
-        //dataSource = TaskDataSource()
     }
     
     //保存ボタンタップ時の挙動

@@ -16,10 +16,13 @@ class TaskDataSource:NSObject{
     //Task 一覧を保持するArray UITableViewに表示させるためのデータ
     private var tasks = [Task]()
     
+    //イニシャライザ　インスタンス生成時にUserDefaultsから最新の状態のデータを取得する
     override init(){
         let userDefaults = UserDefaults.standard
         let taskDictionaries = userDefaults.object(forKey: "tasks") as? [[String:Any]]
         guard let t = taskDictionaries else { return }
+        
+        print(#function)
         
         //辞書の要素から値を取り出す
         for dic in t{
@@ -28,22 +31,11 @@ class TaskDataSource:NSObject{
             tasks.append(task)
         }
     }
-    //UserDefaultsから保存したTask一覧を取得するメソッド
-//    func loadData(){
-//        let userDefaults = UserDefaults.standard
-//        let taskDictionaries = userDefaults.object(forKey: "tasks") as? [[String:Any]]
-//        guard let t = taskDictionaries else { return }
-//
-//        //辞書の要素から値を取り出す
-//        for dic in t{
-//            //値をTaskクラスの引数にセットして値を設定した後にTask配列に格納する
-//            let task = Task(from:dic)
-//            tasks.append(task)
-//        }
-//    }
     
     //配列の全要素を削除して最新のTask一覧を再取得するメソッド
     func reloadData(){
+        //遷移先から遷移元に戻った時、生きてるTaskDataSourceインスタンスの配列tasksには初期表示のデータが格納されている状態
+        //ゆえにデータの配列への二重取得を防ぐため配列の全要素を削除している
         tasks.removeAll()
         let userDefaults = UserDefaults.standard
         let taskDictionaries = userDefaults.object(forKey: "tasks") as? [[String:Any]]

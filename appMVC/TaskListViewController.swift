@@ -22,13 +22,13 @@ import UIKit
         tableView.delegate = self
         tableView.dataSource = self
         
-        //dataSource = TaskDataSource()
-        //dataSource.loadData()
+        print(#function)
     }
     
     //タスク登録画面から戻ってきたときに再描画
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+         print(#function)
         dataSource.reloadData()
         tableView.reloadData()
     }
